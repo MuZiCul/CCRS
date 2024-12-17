@@ -49,7 +49,8 @@ end
 
 ### CNN模型架构
 
-```python:models/cnn_model.py
+```python
+models/cnn_model.py
 class CNNModel(nn.Module):
     def __init__(self, num_classes):
         super(CNNModel, self).__init__()
@@ -130,9 +131,6 @@ f(x) = max(0, x)
 - 验证集准确率：96.2%
 - 测试集准确率：95.8%
 
-### 5. 可视化分析
-![特征图可视化](path/to/feature_maps.png)
-![混淆矩阵](path/to/confusion_matrix.png)
 
 ## 使用说明
 

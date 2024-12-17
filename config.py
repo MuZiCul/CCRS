@@ -11,6 +11,7 @@ class Config:
 
     # 训练配置
     DEFAULT_PATH = "models"
+    DEFAULT_PATH = "models/default"
     MODEL_SAVE_PATH = DEFAULT_PATH + "/chinese_ocr_model.h5"
     CHAR_MAPPINGS_PATH = DEFAULT_PATH + '/char_mappings.pkl'
     
