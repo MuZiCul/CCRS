@@ -234,7 +234,7 @@ def prune_model(model, pruning_ratio=0.3):
 ## 模型训练流程
 
 ### 1. 数据准备
-```python
+```html
 datasets/
   ├── train/
   │   ├── 字符1/
@@ -263,7 +263,6 @@ datasets/
   - 随机旋转
   - 随机裁剪
   - 颜色抖动
-![数据集格式](path/to/training111.png)
 
 ### 2. 训练参数设置
 - 批次大小：64
