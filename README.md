@@ -234,6 +234,7 @@ def prune_model(model, pruning_ratio=0.3):
 ## 模型训练流程
 
 ### 1. 数据准备
+```python
 datasets/
   ├── train/
   │   ├── 字符1/
@@ -255,7 +256,7 @@ datasets/
       │   ├── image2.png
       │   └── ...
       └── ...
-
+```
 - 数据集划分：训练集(70%)、验证集(15%)、测试集(15%)
 - 数据增强策略：
   - 随机水平翻转
