@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>使用帮助 - 汉字识别系统</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .nav-tabs {
+            margin-bottom: 30px;
+            border-bottom: 2px solid #dee2e6;
+        }
+        .nav-tabs .nav-link {
+            color: #495057;
+            border: none;
+            padding: 12px 20px;
+            font-weight: 500;
+        }
+        .nav-tabs .nav-link.active {
+            color: #0d6efd;
+            border-bottom: 2px solid #0d6efd;
+            background: none;
+        }
+        .main-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .help-section {
+            margin-bottom: 30px;
+        }
+        .help-section h3 {
+            color: #0d6efd;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .parameter-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .parameter-card h4 {
+            color: #495057;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        .tip-box {
+            background: #e7f3ff;
+            border-left: 4px solid #0d6efd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="/">汉字识别</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/train">模型训练</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/help">使用帮助</a>
+            </li>
+        </ul>
+
+        <div class="main-container">
+            <h2 class="mb-4">使用帮助</h2>
+
+            <!-- 训练参数说明 -->
+            <div class="help-section">
+                <h3><i class="fas fa-sliders-h me-2"></i>训练参数说明</h3>
+                
+                <div class="parameter-card">
+                    <h4>批次大小 (Batch Size)</h4>
+                    <p>批次大小是指每次模型训练时同时处理的样本数量。</p>
+                    <ul>
+                        <li>较小的批次大小（如16）：
+                            <ul>
+                                <li>训练更新更频繁</li>
+                                <li>可能有更好的泛化性能</li>
+                                <li>占用内存较少</li>
+                                <li>训练可能不够稳定</li>
+                            </ul>
+                        </li>
+                        <li>较大的批次大小（如128）：
+                            <ul>
+                                <li>训练更稳定</li>
+                                <li>可以更好利用GPU</li>
+                                <li>需要更多内存</li>
+                                <li>可能错过一些优化机会</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="tip-box">
+                        <strong>建议值：</strong> 32或64
+                        <br>
+                        <small>这是在训练效率和效果之间的平衡点</small>
+                    </div>
+                </div>
+
+                <div class="parameter-card">
+                    <h4>训练轮数 (Epochs)</h4>
+                    <p>训练轮数表示模型将遍历整个训练数据集的次数。</p>
+                    <ul>
+                        <li>较少的轮数：
+                            <ul>
+                                <li>训练时间短</li>
+                                <li>可能欠拟合</li>
+                            </ul>
+                        </li>
+                        <li>较多的轮数：
+                            <ul>
+                                <li>可能获得更好的性能</li>
+                                <li>训练时间长</li>
+                                <li>可能过拟合</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="tip-box">
+                        <strong>建议值：</strong> 50-100
+                        <br>
+                        <small>系统会自动监控训练进度，在性能不再提升时提前停止</small>
+                    </div>
+                </div>
+
+                <div class="help-section">
+                    <h3><i class="fas fa-microchip me-2"></i>GPU 训练说明</h3>
+                    
+                    <div class="parameter-card">
+                        <h4>GPU 训练要求</h4>
+                        <ul>
+                            <li>硬件要求：
+                                <ul>
+                                    <li>NVIDIA GPU 显卡（建议至少 4GB 显存）</li>
+                                    <li>建议使用 RTX 或 GTX 系列显卡</li>
+                                </ul>
+                            </li>
+                            <li>软件要求：
+                                <ul>
+                                    <li>NVIDIA 显卡驱动</li>
+                                    <li>CUDA Toolkit（建议版本 11.0 或更高）</li>
+                                    <li>cuDNN（与 CUDA 版本匹配）</li>
+                                    <li>tensorflow-gpu</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="tip-box">
+                            <strong>安装提示：</strong>
+                            <ol>
+                                <li>首先安装 NVIDIA 显卡驱动</li>
+                                <li>安装对应版本的 CUDA Toolkit</li>
+                                <li>安装匹配的 cuDNN</li>
+                                <li>使用 pip 安装 tensorflow-gpu</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="parameter-card">
+                        <h4>GPU 训练优势</h4>
+                        <ul>
+                            <li>训练速度：
+                                <ul>
+                                    <li>相比 CPU 训练可提升 5-20 倍速度</li>
+                                    <li>特别适合大规模数据集训练</li>
+                                </ul>
+                            </li>
+                            <li>内存管理：
+                                <ul>
+                                    <li>使用显存进行计算，减轻系统内存负担</li>
+                                    <li>支持更大的批次大小</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="tip-box">
+                            <strong>使用建议：</strong>
+                            <br>
+                            <small>
+                                - 首次训练时先用小数据集测试 GPU 功能<br>
+                                - 如果显存不足，可以适当减小批次大小<br>
+                                - 训练时注意监控 GPU 温度
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="parameter-card">
+                        <h4>常见问题</h4>
+                        <ul>
+                            <li>GPU 未被检测到：
+                                <ul>
+                                    <li>检查显卡驱动是否正确安装</li>
+                                    <li>确认 CUDA 版本与 TensorFlow 版本匹配</li>
+                                    <li>检查 PATH 环境变量是否正确设置</li>
+                                </ul>
+                            </li>
+                            <li>显存不足：
+                                <ul>
+                                    <li>减小批次大小</li>
+                                    <li>使用动态显存分配</li>
+                                    <li>检查是否有其他程序占用显存</li>
+                                </ul>
+                            </li>
+                            <li>训练速度不理想：
+                                <ul>
+                                    <li>确保批次大小合适</li>
+                                    <li>检查 CPU 是否成为瓶颈</li>
+                                    <li>优化数据加载流程</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 数据集要求 -->
+            <div class="help-section">
+                <h3><i class="fas fa-database me-2"></i>数据集要求</h3>
+                <div class="parameter-card">
+                    <h4>数据集结构</h4>
+                    <ul>
+                        <li>目录结构：
+                            <pre>
+datasets/
+  ├── train/
+  │   ├── 字符1/
+  │   │   ├── image1.png
+  │   │   ├── image2.png
+  │   │   └── ...
+  │   ├── 字符2/
+  │   │   ├── image1.png
+  │   │   ├── image2.png
+  │   │   └── ...
+  │   └── ...
+  └── test/
+      ├── 字符1/
+      │   ├── image1.png
+      │   ├── image2.png
+      │   └── ...
+      ├── 字符2/
+      │   ├── image1.png
+      │   ├── image2.png
+      │   └── ...
+      └── ...
+                            </pre>
+                        </li>
+                        <li>图片要求：
+                            <ul>
+                                <li>支持格式：PNG、JPG、JPEG</li>
+                                <li>建议大小：64x64像素</li>
+                                <li>颜色：灰度图像</li>
+                            </ul>
+                        </li>
+                        <li>数据量要求：
+                            <ul>
+                                <li>每个字符类别至少100个样本</li>
+                                <li>训练集和测试集比数量建议为8:2</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 使用建议 -->
+            <div class="help-section">
+                <h3><i class="fas fa-lightbulb me-2"></i>使用建议</h3>
+                <div class="parameter-card">
+                    <ul>
+                        <li>首次训练时，建议使用默认参数进行尝试</li>
+                        <li>观察训练过程中的损失值和准确率变化，根据需要调整参数</li>
+                        <li>如果训练效果不理想，可以：
+                            <ul>
+                                <li>增加训练数据量</li>
+                                <li>调整批次大小</li>
+                                <li>适当增加训练轮数</li>
+                                <li>确保数据集质量</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

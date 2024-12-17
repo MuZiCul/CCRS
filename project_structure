@@ -1,0 +1,10 @@
+chinese_ocr/
+├── data/
+│   ├── train/
+│   └── test/
+├── models/
+├── utils/
+├── config.py
+├── train.py
+├── predict.py
+└── requirements.txt 
